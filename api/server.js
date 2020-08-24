@@ -1,9 +1,16 @@
-const express = require("express");
+const express = require("express"); // import express
+const accountsRouter = require('../routers/accounts') // import router
 
-const db = require("../data/dbConfig.js");
+const db = require("../data/dbConfig.js"); // require database
 
-const server = express();
+const server = express(); // allow server to use express
 
-server.use(express.json());
+server.use(express.json()); // convert express to json
 
-module.exports = server;
+server.use('/api/accounts', accountsRouter) // set accounts router api to this endpoint to start
+
+server.get('/', (req, res) => {
+    res.status(200).json({ API: 'The API is Running!' })
+}) // set base server endpoint and return a successful message
+
+module.exports = server; // export server
